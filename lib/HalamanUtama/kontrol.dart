@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<Album> createAlbum() async {
+Future<DataSensor> kirimDataSensor() async {
   final http.Response response = await http.post(
     'https://platform.antares.id:8443/~/antares-cse/antares-id/smartPestisida/esp32_dhf_2020',
     headers: <String, String>{
@@ -17,16 +17,19 @@ Future<Album> createAlbum() async {
   );
 
   if (response.statusCode == 201) {
-    return Album.fromJson(json.decode(response.body));
-  } }
+    return DataSensor.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to create album.');
+  }
+}
 
-class Album {
+class DataSensor {
   final String title;
 
-  Album({this.title});
+  DataSensor({this.title});
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
+  factory DataSensor.fromJson(Map<String, dynamic> json) {
+    return DataSensor(
       title: json['m2m:cin'],
     );
   }
@@ -39,11 +42,11 @@ class Kontrol extends StatefulWidget {
 
 class _KontrolState extends State<Kontrol> {
 
-  Future<Album> _futureAlbum;
+  Future<DataSensor> _futureDataSensor;
 
   void cek()async{
     setState(() async{
-      _futureAlbum = createAlbum();
+      _futureDataSensor = kirimDataSensor();
     });
   }
 

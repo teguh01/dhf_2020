@@ -1,10 +1,10 @@
-class Album {
+class SensorAlat {
   final String lahan;
 
-  Album({this.lahan});
+  SensorAlat({this.lahan});
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
+  factory SensorAlat.fromJson(Map<String, dynamic> json) {
+    return SensorAlat(
       lahan: json['m2m:cin']['con'],
     );
   }

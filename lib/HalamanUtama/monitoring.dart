@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dhf_2020/HalamanUtama/sensor.dart';
 import 'sensor.dart';
 
-Future<Album> fetchAlbum() async {
+Future<SensorAlat> fetchSensor() async {
   final response = await http.get(
       'https://platform.antares.id:8443/~/antares-cse/antares-id/smartPestisida/esp32_dhf_2020/la',
        headers: {"X-M2M-Origin": "3d65eb3a72a7d964:6af31b96efd74987",
@@ -16,7 +16,7 @@ Future<Album> fetchAlbum() async {
   if (response.statusCode == 200) {
     print(json.decode(response.body));
     print("berhasil");
-    return Album.fromJson(json.decode(response.body));
+    return SensorAlat.fromJson(json.decode(response.body));
   } else {
     print("gagal");
     throw Exception('Failed to load album');
@@ -29,12 +29,12 @@ class Monitoring extends StatefulWidget {
 }
 
 class _MonitoringState extends State<Monitoring> {
-  Future<Album> futureAlbum;
+  Future<SensorAlat> futureSensor;
 
   setUpTimedFetch() {
     Timer.periodic(Duration(milliseconds: 5000), (timer) {
       setState(() {
-        futureAlbum = fetchAlbum();
+        futureSensor = fetchSensor();
       });
     });
   }
@@ -43,15 +43,15 @@ class _MonitoringState extends State<Monitoring> {
   void initState() {
     super.initState();
     setUpTimedFetch();
-    futureAlbum = fetchAlbum();
+    futureSensor = fetchSensor();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder<Album>(
-          future: futureAlbum,
+        child: FutureBuilder<SensorAlat>(
+          future: futureSensor,
           builder: (context, snapshot) {
             if(snapshot.hasData){
               return Container(
