@@ -40,7 +40,11 @@ class _LoginPageState extends State<LoginPage> {
         child: ListView(
           padding: EdgeInsets.all(16.0),
           children: <Widget>[
-            Container(width: 300, height: 280,),
+            Container(width: 300, height: 150,),
+            Center(
+              child: Text("Smart Pestisida", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+            ),
+            SizedBox(height: 50),
             Container(
               width: 300,
               height: 80,

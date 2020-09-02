@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../HalamanUtama/halaman_utama.dart';
 import 'auth_services.dart';
 
 class Register extends StatefulWidget {
@@ -82,6 +83,9 @@ class _RegisterState extends State<Register> {
                 await AuthServices.signUp(
                     emailController.text, passwordController.text);
                 check();
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => Monitoring()
+                ));
               },
             ),
           ],

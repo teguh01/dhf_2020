@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.0.5
   http:
   string_splitter: ^0.1.0+5
+  weather_icons: ^2.0.1
 
 dev_dependencies:
   flutter_test:
